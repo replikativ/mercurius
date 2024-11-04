@@ -13,7 +13,7 @@ Mercurius currently supports a simple stripe based payment model.
 Add mercurius to your dependencies:
 
 ~~~clojure
-{:deps {mercurius/mercurius {:git/url "https://github.com/whilo/mercurius.git"
+{:deps {mercurius/mercurius {:git/url "https://github.com/replikativ/mercurius.git"
                              :git/sha "CURRENT_SHA"}}}
 ~~~
 
