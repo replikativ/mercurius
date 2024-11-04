@@ -2,9 +2,9 @@
 
 This library constitutes a payment provider usable in combination with the augmented Eclipse license below. The general idea is to use licensing to enforce payments by designated user groups through function invocations in the code. All open-source freedoms are granted as usual, but if code contains payment calls that require the user to pay then it must be executed against a payment provider, such as the one provided by mercurius. The choice of payment provider is up to the developer and the use is fully specified by their implementation and documentation.
 
-The goal of this arrangement is to encourage the fast evolution and benefits that are provided by open source software development, while providing proper economic feedback to the creators, e.g. through commercial clients. While some free and open source software (FOSS) proponents will argue that this arrangement is not open, software always exist as part of an economic process that needs to sustain itself (such as life itself). 
+The goal of this arrangement is to encourage the fast evolution and benefits that are provided by open source software development, while providing proper economic feedback to the creators, e.g. through commercial clients. While some free and open source software (FOSS) proponents will argue that this arrangement is not open, software always exists as part of an economic process that needs to sustain itself (such as life itself). 
 
-For example, an arrangement that requires for profit businesses to pay, while all other user groups can make use of the software in conventional open-source terms, can be considered superior to dual licensing in an open core model, because the business users are still free to benefit from the open source nature of the code, while the rest of the user groups can use the same features. In addition, the payment model is transparently documented in the code and can be executed automatically without additional bureaucratic overhead. Compared to SaaS models customers can rely on the availability and control over the functionality through the source code without counterparty risk, while the developer does not have setup a complicated silo to provide the functionality.
+For example, an arrangement that requires for profit businesses to pay, while all other user groups can make use of the software in conventional open-source terms, can be considered superior to dual licensing in an open core model, because the business users are still free to benefit from the open source nature of the code, while the rest of the user groups can use the same features. In addition, the payment model is transparently documented in the code and can be executed automatically without additional bureaucratic overhead. Compared to SaaS models customers can rely on the availability and control over the functionality through the source code without counterparty risk, while the developer does not have to setup a complicated silo to provide the functionality.
 
 Mercurius currently supports a simple stripe based payment model. 
 
@@ -40,7 +40,7 @@ The code invocations in the licensed code look like, here for a software that ma
 (m/get-all-payments)
 ~~~
 
-To demonstrate the idea we currently only provide Clojure bindings here, but mercurius is intended to be available for as many programming languages as possible.
+To demonstrate the concept we currently only provide Clojure bindings here, but mercurius is intended to be available for as many programming languages as possible.
 
 ## User tags
 
