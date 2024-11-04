@@ -1,5 +1,7 @@
 # mercurius
 
+*Openly evolve code, and transparently pay when you run it in a specific context.*
+
 This library constitutes a payment provider usable in combination with the augmented Eclipse license below. The general idea is to use licensing to enforce payments by designated user groups through function invocations in the code. All open-source freedoms are granted as usual, but if code contains payment calls that require the user to pay then it must be executed against a payment provider, such as the one provided by mercurius. The choice of payment provider is up to the developer and the use is fully specified by their implementation and documentation.
 
 The goal of this arrangement is to encourage the fast evolution and benefits that are provided by open source software development, while providing proper economic feedback to the creators, e.g. through commercial clients. While some free and open source software (FOSS) proponents will argue that this arrangement is not open, software always exists as part of an economic process that needs to sustain itself (such as life itself). 
@@ -46,6 +48,7 @@ To demonstrate the concept we currently only provide Clojure bindings here, but 
 
 You need to follow this basic taxonomy to qualify your user type in the configuration. 
 
+- "testing": You are running the code in a testing or development environment.
 - "private": You are a private person and the code is not run in an institutional context.
 - "non-profit": The code is run in a non-profit entity according to your local legislation.
 - "for-profit": The code is run in a for profit entity according to your local legislation.
