@@ -25,7 +25,7 @@ export USER_TAGS=private,non-profit                    # your user tags, by defa
 export STRIPE_API_KEY=sk_test_Hrs6SAopgFPF0bZXSN3f6ELN # your STRIPE API KEY
 ~~~
 
-The code invocations in the licensed code look like, here for a software that manages customers and has a monthly subscription:
+The code invocations in the licensed code look as follows, here for a software that manages customers and has a monthly subscription:
 
 ~~~clojure
 (require '[mercurius.core :as m])
@@ -54,7 +54,7 @@ The taxonomy can be extended by users of the mercurius library to provide a more
 
 ## Eclipse Public License with Transparent Payment Enforcement Additions
 
-This is an augmented EPL 2.0 license requiring the licensee to comply with the payment functionality. In case where no payment functions are used it corresponds to vanilla EPL 2.0. It has not been tested in court yet and legal feedback is welcome. Please open an issue on this repository to get in contact. Other open source licenses could be augmented in a similar way, although copyleft licenses make more sense since they require application of the license also to derivative works.
+This is an augmented EPL 2.0 license requiring the licensee to comply with the payment functionality. In case where no payment functions are used it corresponds to vanilla EPL 2.0. It has not been tested in court yet and legal feedback is welcome. Please open an issue on this repository to get in contact. Other open source licenses could be augmented in a similar way, although copyleft licenses make more sense, since they require application of the license also to derivative works.
 
 ~~~
 Eclipse Public License - Version 2.0 with Transparent Payment Enforcement Additions
