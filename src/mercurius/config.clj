@@ -18,7 +18,7 @@
           (throw (ex-info "Missing path" {:config config})))
         config))))
 
-(def ^:dynamic config 
+(def ^:dynamic config
   (let [config {:user-tags (into #{} (str/split (env :USER_TAGS "private") #","))
                 :stripe-api-key (env :STRIPE_API_KEY "sk_test_Hrs6SAopgFPF0bZXSN3f6ELN")
                 :path (env :PATH "./mercurius")}]
