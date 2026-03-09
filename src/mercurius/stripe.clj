@@ -25,14 +25,11 @@
                              :form-params params})]
     (json/read-value (:body response))))
 
-
 (comment
 ;; Example usage
   (def payment-intent (create-payment-intent 1000 "usd"
                                              "cus_ABC123" ;"pm_card_visa"
                                              ))
 
-  (println "Payment Intent:" payment-intent)
-
-  )
+  (println "Payment Intent:" payment-intent))
 

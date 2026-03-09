@@ -3,7 +3,7 @@
   (:require [datahike.api :as d]
             [mercurius.stripe :as stripe]
             [mercurius.config :refer [config]]
-            [taoensso.timbre :as timbre]
+            [replikativ.logging :as log]
             [clojure.spec.alpha :as s]))
 
 (def db-cfg {:store {:backend :file :path (:path config)}})
@@ -27,41 +27,38 @@
              {:db/ident :payment/user-tags
               :db/valueType :db.type/string
               :db/cardinality :db.cardinality/many
-              :db/doc "The user type of the payment."} 
+              :db/doc "The user type of the payment."}
              {:db/ident :payment/created-at
-             :db/valueType :db.type/instant
+              :db/valueType :db.type/instant
               :db/cardinality :db.cardinality/one
               :db/doc "The time the payment was created."}])
 
 (defn setup-db [cfg]
- (try
+  (try
     (let [cfg (d/create-database cfg)
           conn (d/connect cfg)]
       (d/transact conn schema)
       conn)
     (catch Exception _e
-      (d/connect cfg))) )
+      (d/connect cfg))))
 
 (def ^:dynamic conn (setup-db db-cfg))
 
 (comment
-  (d/delete-database db-cfg)
-
-  )
-
+  (d/delete-database db-cfg))
 
 (s/fdef pay :args (s/cat :payment-id string?
                          :user-tags set?
                          :amount number?
                          :currency string?
                          :payee string?)
-        :ret any?)
+  :ret any?)
 (defn pay
   "Pay once for a service."
   [payment-id user-tags amount currency payee]
   (when (some (:user-tags config) user-tags)
     (let [res (stripe/create-payment-intent amount currency payee)]
-      (timbre/debug "Payment status:" res)
+      (log/debug :mercurius/payment-status {:result res})
       (d/transact conn [{:payment/id payment-id
                          :payment/amount amount
                          :payment/currency currency
@@ -77,7 +74,7 @@
                                  :amount number?
                                  :currency string?
                                  :payee string?)
-        :ret any?)
+  :ret any?)
 (defn pay-monthly
   "Pay monthly for a service. Payment id should identify the payment and will be used to check if the payment has already been made this month."
   [payment-id user-tags amount currency payee]
@@ -97,7 +94,7 @@
                      @conn payment-id payee)]
       (when-not paid?
         (let [res (stripe/create-payment-intent amount currency payee)]
-          (timbre/debug "Payment status:" res)
+          (log/debug :mercurius/monthly-payment-status {:result res})
           (d/transact conn [{:payment/id payment-id
                              :payment/amount amount
                              :payment/currency currency
@@ -108,12 +105,10 @@
 (comment
   (pay "payee creation" ["private"] 10 "usd" "stripe_connect_id_for_developer")
 
-  (pay-monthly "mercurius monthly subscription" ["private"] 1000 "usd"  "stripe_connect_id_for_developer")
-
-  )
+  (pay-monthly "mercurius monthly subscription" ["private"] 1000 "usd"  "stripe_connect_id_for_developer"))
 
 (s/fdef get-all-payments :args (s/cat)
-        :ret (s/coll-of map?))
+  :ret (s/coll-of map?))
 (defn get-all-payments
   "Get all payments from the database."
   []
@@ -136,6 +131,4 @@
             :created-at created-at}))))
 
 (comment
-  (get-all-payments)
-
-  )
+  (get-all-payments))
