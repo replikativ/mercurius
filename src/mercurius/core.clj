@@ -3,7 +3,7 @@
   (:require [datahike.api :as d]
             [mercurius.stripe :as stripe]
             [mercurius.config :refer [config]]
-            [taoensso.timbre :as timbre]
+            [replikativ.logging :as log]
             [clojure.spec.alpha :as s]))
 
 (def db-cfg {:store {:backend :file :path (:path config)}})
@@ -61,7 +61,7 @@
   [payment-id user-tags amount currency payee]
   (when (some (:user-tags config) user-tags)
     (let [res (stripe/create-payment-intent amount currency payee)]
-      (timbre/debug "Payment status:" res)
+      (log/debug :mercurius/payment-status {:result res})
       (d/transact conn [{:payment/id payment-id
                          :payment/amount amount
                          :payment/currency currency
@@ -97,7 +97,7 @@
                      @conn payment-id payee)]
       (when-not paid?
         (let [res (stripe/create-payment-intent amount currency payee)]
-          (timbre/debug "Payment status:" res)
+          (log/debug :mercurius/monthly-payment-status {:result res})
           (d/transact conn [{:payment/id payment-id
                              :payment/amount amount
                              :payment/currency currency

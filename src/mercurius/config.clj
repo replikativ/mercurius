@@ -1,20 +1,20 @@
 (ns mercurius.config
   (:require [environ.core :refer [env]]
             [clojure.string :as str]
-            [taoensso.timbre :as timbre]))
+            [replikativ.logging :as log]))
 
 (defn validate-config [config]
   (if (nil? (:stripe-api-key config))
     (do
-      (timbre/error "Missing Stripe API key" {:config config})
+      (log/error :mercurius/missing-stripe-api-key {:config config})
       (throw (ex-info "Missing Stripe API key" {:config config})))
     (if (empty? (:user-tags config))
       (do
-        (timbre/error "Missing user tags" {:config config})
+        (log/error :mercurius/missing-user-tags {:config config})
         (throw (ex-info "Missing user tags" {:config config})))
       (if (nil? (:path config))
         (do
-          (timbre/error "Missing path" {:config config})
+          (log/error :mercurius/missing-path {:config config})
           (throw (ex-info "Missing path" {:config config})))
         config))))
 
